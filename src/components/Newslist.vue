@@ -4,11 +4,11 @@
       <li class="media" v-for="article in articles">
       <div class="card card-border" style="width: 30rem;" >
         <a v-bind:href="article.url" target="_blank">
-          <img class="card-img-top" v-bind:src="article.urlToImage" alt="Card image cap">
+          <img class="card-img-top" v-bind:src="article.urlToImage">
         </a>
         <div class="card-body">
-          <h4 class="media-heading"><a v-bind:href="article.url" target="_blank">{{article.title}}</a></h4>
-          <h4 class="card-text"><i>by {{article.author}}</i></h4>
+          <h4><a v-bind:href="article.url" target="_blank">{{article.title}}</a></h4>
+          <h4 class="card-text"><b>by {{article.author}}</b></h4>
           <p>{{article.description}}</p>
         </div>
       </div>

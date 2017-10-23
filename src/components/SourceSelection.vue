@@ -2,8 +2,7 @@
   <div class="sourceselection">
     <div>
       <div class="container">
-        <span class="oi oi-briefcase"></span>
-        <h4>Select News Source</h4>
+        <span>Select News</span>
         <select class="custom-select" required v-on:change="sourceChanged">
           <option value="">Select News</option>
           <option v-for="source in sources" v-bind:value="source.id">{{source.name}}</option>
@@ -11,7 +10,7 @@
         <div v-if="source">
           <div class="jumbotron jumbotron-fluid">
             <div class="posleft">
-              <h6>{{source.description}}</h6>
+              <p>{{source.description}}</p>
               <a v-bind:href="source.url" type="button" class="btn btn-dark" target="_blank">Visit {{source.name}}</a>
             </div>
           </div>
@@ -30,6 +29,14 @@ export default {
       source: ''
     }
   },
+  
+  created: function () {
+    this.$http.get('https://newsapi.org/v1/sources?language=en')
+      .then(response => {
+        this.sources = response.data.sources;
+      });
+  },
+
   methods: {
     sourceChanged: function(e) {
      for (var i=0; i<this.sources.length; i++) {
@@ -39,12 +46,6 @@ export default {
      }
      this.$emit('sourceChanged', e.target.value);
     }
-  },
-  created: function () {
-    this.$http.get('https://newsapi.org/v1/sources?language=en')
-      .then(response => {
-        this.sources = response.data.sources;
-      });
   }
 }
 </script>
